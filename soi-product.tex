@@ -1,0 +1,96 @@
+\documentclass{patmorin}
+\listfiles
+\usepackage{pat}
+\usepackage{paralist}
+\usepackage{dsfont}  % for \mathds{A}
+\usepackage[utf8x]{inputenc}
+\usepackage{skull}
+\usepackage{paralist}
+\usepackage{graphicx}
+\usepackage[noend]{algorithmic}
+
+\usepackage[normalem]{ulem}
+\usepackage{cancel}
+%\usepackage{enumitem}
+
+\usepackage{todonotes}
+
+% etoolbox allows for robust commands that don't need \protect, e.g.
+% \newrobustcmd{\onesub}{\mathord{\includegraphics{figs/one-sub}}}
+% \subsection{Approximate Voronoi Diagrams in $G^{\onesub}_k$}
+\usepackage{etoolbox}
+
+\usepackage[longnamesfirst,numbers,sort&compress]{natbib}
+
+\usepackage[mathlines]{lineno}
+\setlength{\linenumbersep}{2em}
+% \linenumbers
+% \rightlinenumbers
+% \linenumbers
+\newcommand*\patchAmsMathEnvironmentForLineno[1]{%
+ \expandafter\let\csname old#1\expandafter\endcsname\csname #1\endcsname
+ \expandafter\let\csname oldend#1\expandafter\endcsname\csname end#1\endcsname
+ \renewenvironment{#1}%
+    {\linenomath\csname old#1\endcsname}%
+    {\csname oldend#1\endcsname\endlinenomath}}%
+\newcommand*\patchBothAmsMathEnvironmentsForLineno[1]{%
+ \patchAmsMathEnvironmentForLineno{#1}%
+ \patchAmsMathEnvironmentForLineno{#1*}}%
+\AtBeginDocument{%
+\patchBothAmsMathEnvironmentsForLineno{equation}%
+\patchBothAmsMathEnvironmentsForLineno{align}%
+\patchBothAmsMathEnvironmentsForLineno{flalign}%
+\patchBothAmsMathEnvironmentsForLineno{alignat}%
+\patchBothAmsMathEnvironmentsForLineno{gather}%
+\patchBothAmsMathEnvironmentsForLineno{multline}%
+}
+
+
+% Taken from
+% https://tex.stackexchange.com/questions/42726/align-but-show-one-equation-number-at-the-end
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+
+\setlength{\parskip}{1ex}
+
+% Document-specific commands and math operators
+\DeclareMathOperator{\tw}{tw}
+\DeclareMathOperator{\td}{td}
+\DeclareMathOperator{\chicen}{\chi_{\mathrm{cen}}}
+\DeclareMathOperator{\chilin}{\chi_{\mathrm{lin}}}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\vor}{Vor}
+
+\newrobustcmd{\onesub}{\mathord{\includegraphics{figs/one-sub}}}
+\newrobustcmd{\leftup}{\mathord{\includegraphics{figs/left-up}}}
+
+\title{\MakeUppercase{The Structure of Planar Sphere-of-Influence Graphs}\thanks{This research was partly funded by NSERC.}}
+\author{Vida Dujmović, Pat Morin, and David R. Wood}
+
+\date{}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    The sphere-of-influence graph of points in $\R^2$ has a product structure theorem?
+
+\end{abstract}
+
+\section{Introduction}
+
+The \emph{intersection graph} of a set $S$ of sets is the graph $G$ with vertex set $V(G):=S$ and edge set $\{vw\in\binom{\cup S}{2}: v\cap w\neq\emptyset\}$.  In this paper we consider the class $\mathxal{G}$ of intersection graphs of sets $D$ of closed disks in $\R^2$ with the restriction that no disk in $D$ contains the center of any other disk in $D$.
+
+The edge-maximal graphs in $\mathcal{G}$ are precisely the sphere-of-influence graphs of points in $\R^2$, defined as follows:  Let $P\subseteq\R^d$ be a finite point set.  The \emph{sphere-of-influence graph} $G$ of $P$ is the graph with vertex set $V(G):=P$ that contains an edge $vw$ if and only if there exists closed balls $d_v$ and $d_w$ centered at $v$ and $w$, respectively, such that $d_v\cap d_w\neq \emptyset$, $d_v\cap P=\{v\}$ and $d_w\cap P=\{w\}$.  The edge-density of sphere-of-influence graphs in Euclidean and non-Euclidean settings has received considerable attention  \cite{avis.horton:,michael.quint:sphere,soss:on,ismailescu.kim.ea:improved, dwyer:expected}.
+% More references here: https://www.semanticscholar.org/paper/Sphere-of-influence-graphs%3A-Edge-density-and-clique-Michael-Quint/308a798c83230a30428b89da04121be072f95705
+
+
+\bibliographystyle{plainurlnat}
+\bibliography{soi-product}
+
+
+
+
+\end{document}
