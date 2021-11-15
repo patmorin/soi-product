@@ -65,7 +65,7 @@
 \newrobustcmd{\leftup}{\mathord{\includegraphics{figs/left-up}}}
 
 \title{\MakeUppercase{The Structure of Planar Sphere-of-Influence Graphs}\thanks{This research was partly funded by NSERC.}}
-\author{Vida Dujmović, Pat Morin, and David R. Wood}
+\author{Prosenjit Bose, Vida Dujmović, Pat Morin, and David R. Wood}
 
 \date{}
 
@@ -76,15 +76,23 @@
 
 \begin{abstract}
     The sphere-of-influence graph of points in $\R^2$ has a product structure theorem?
-
 \end{abstract}
 
 \section{Introduction}
 
-The \emph{intersection graph} of a set $S$ of sets is the graph $G$ with vertex set $V(G):=S$ and edge set $\{vw\in\binom{\cup S}{2}: v\cap w\neq\emptyset\}$.  In this paper we consider the class $\mathxal{G}$ of intersection graphs of sets $D$ of closed disks in $\R^2$ with the restriction that no disk in $D$ contains the center of any other disk in $D$.
+The \emph{intersection graph} of a set $S$ of sets is the graph $G$ with vertex set $V(G):=S$ and edge set $\{vw\in\binom{S}{2}: v\cap w\neq\emptyset\}$.  In this paper we consider the class $\mathcal{G}$ of intersection graphs of sets $D$ of open disks in $\R^2$ with the restriction that no disk in $D$ contains the center of any other disk in $D$.
 
-The edge-maximal graphs in $\mathcal{G}$ are precisely the sphere-of-influence graphs of points in $\R^2$, defined as follows:  Let $P\subseteq\R^d$ be a finite point set.  The \emph{sphere-of-influence graph} $G$ of $P$ is the graph with vertex set $V(G):=P$ that contains an edge $vw$ if and only if there exists closed balls $d_v$ and $d_w$ centered at $v$ and $w$, respectively, such that $d_v\cap d_w\neq \emptyset$, $d_v\cap P=\{v\}$ and $d_w\cap P=\{w\}$.  The edge-density of sphere-of-influence graphs in Euclidean and non-Euclidean settings has received considerable attention  \cite{avis.horton:,michael.quint:sphere,soss:on,ismailescu.kim.ea:improved, dwyer:expected}.
+The graph class $\mathcal{G}$ is closely related to the sphere-of-influence graphs of points in $\R^2$, defined as follows:  Let $P\subseteq\R^d$ be a finite point set.  The \emph{sphere-of-influence graph} $G$ of $P$ is the graph with vertex set $V(G):=P$ that contains an edge $vw$ if and only if there exists open balls $d_v$ and $d_w$ centered at $v$ and $w$, respectively, such that $d_v\cap d_w\neq \emptyset$, $d_v\cap P=\{v\}$ and $d_w\cap P=\{w\}$.  Sphere-of-influence graphs are the edge-maximal graphs in $\mathcal{G}$, in the following sense: For any $G\in\mathcal{G}$, the sphere-of-influence graph of the centers of the disks in $V(G)$ contains $G$ as a subgraph.  The edge-density of sphere-of-influence graphs in Euclidean and non-Euclidean settings has received considerable attention  \cite{avis.horton:,michael.quint:sphere,soss:on,ismailescu.kim.ea:improved, dwyer:expected}.
 % More references here: https://www.semanticscholar.org/paper/Sphere-of-influence-graphs%3A-Edge-density-and-clique-Michael-Quint/308a798c83230a30428b89da04121be072f95705
+
+
+\section{The Product Structure of Sphere-of-Influence Graphs}
+
+Let $P:=\{p_1,\ldots,p_n\}$ be a set of $n$ points in $\R^2$ and, for each $i\in\{1,\ldots,n\}$, let $d_i$ be the open disk centered at $p_i$ with $d_i\cap P=\{p_i\}$ and having maximal radius.  Let $G$ be the sphere-of-influence graph of $P$.  (Equivalently, $G$ is the intersection graph of $\{d_1,\ldots,d_n\}$.)  We want to prove that there exist a graph $H$ of treewidth at most $?$ and a path $P$ such that $G$ is isomorphic to a subgraph of $H\boxtimes P$. We may assume that $G$ is connected since, otherwise we can handle each connected component of $G$ separately.
+
+Let $t>0$ and begin by adding three vertices $a_0:=(0,t\sqrt{7/4})$, $a_1:=(-t. -t\sqrt{3/2})$, and $a_2:=(t, -t\sqrt{3/2})$ to $P$.  For a sufficiently large value of $t$ the sphere-of-influence graph of $P\cup\{a_0,a_1,a_2\}$ contains $G$.  (The points $a_0,a_1,a_2$ are the vertices of an equilateral triangle whose interior contains the disks $d_1,\ldots,d_n$.)
+
+
 
 
 \bibliographystyle{plainurlnat}
