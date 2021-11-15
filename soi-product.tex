@@ -90,8 +90,9 @@ The graph class $\mathcal{G}$ is closely related to the sphere-of-influence grap
 
 Let $P:=\{p_1,\ldots,p_n\}$ be a set of $n$ points in $\R^2$ and, for each $i\in\{1,\ldots,n\}$, let $d_i$ be the open disk centered at $p_i$ with $d_i\cap P=\{p_i\}$ and having maximal radius.  Let $G$ be the sphere-of-influence graph of $P$.  (Equivalently, $G$ is the intersection graph of $\{d_1,\ldots,d_n\}$.)  We want to prove that there exist a graph $H$ of treewidth at most $?$ and a path $P$ such that $G$ is isomorphic to a subgraph of $H\boxtimes P$. We may assume that $G$ is connected since, otherwise we can handle each connected component of $G$ separately.
 
-Let $t>0$ and begin by adding three vertices $a_0:=(0,t\sqrt{7/4})$, $a_1:=(-t. -t\sqrt{3/2})$, and $a_2:=(t, -t\sqrt{3/2})$ to $P$.  For a sufficiently large value of $t$ the sphere-of-influence graph of $P\cup\{a_0,a_1,a_2\}$ contains $G$.  (The points $a_0,a_1,a_2$ are the vertices of an equilateral triangle whose interior contains the disks $d_1,\ldots,d_n$.)
+So that we have a place to start, we let $t>0$ and assume that $p_1:=(0,t\sqrt{7/4})$, $p_2:=(-t. -t\sqrt{3/2})$, and $p_3:=(t, -t\sqrt{3/2})$.  For a sufficiently large value of $t$, the points $a_0,a_1,a_2$ are the vertices of an equilateral triangle whose interior contains the disks $d_4\ldots,d_n$.  This assumption is safe, since we can always add three such vertices of $P$ to obtain a graph that contains $G$ as a subgraph.
 
+Let $C_0$ be the circle that contains $p_1$, $p_2$, and $p_3$.
 
 
 
