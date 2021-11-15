@@ -60,6 +60,7 @@
 \DeclareMathOperator{\chilin}{\chi_{\mathrm{lin}}}
 \DeclareMathOperator{\dist}{dist}
 \DeclareMathOperator{\vor}{Vor}
+\DeclareMathOperator{\interior}{int}
 
 \newrobustcmd{\onesub}{\mathord{\includegraphics{figs/one-sub}}}
 \newrobustcmd{\leftup}{\mathord{\includegraphics{figs/left-up}}}
@@ -88,11 +89,54 @@ The graph class $\mathcal{G}$ is closely related to the sphere-of-influence grap
 
 \section{The Product Structure of Sphere-of-Influence Graphs}
 
-Let $P:=\{p_1,\ldots,p_n\}$ be a set of $n$ points in $\R^2$ and, for each $i\in\{1,\ldots,n\}$, let $d_i$ be the open disk centered at $p_i$ with $d_i\cap P=\{p_i\}$ and having maximal radius.  Let $G$ be the sphere-of-influence graph of $P$.  (Equivalently, $G$ is the intersection graph of $\{d_1,\ldots,d_n\}$.)  We want to prove that there exist a graph $H$ of treewidth at most $?$ and a path $P$ such that $G$ is isomorphic to a subgraph of $H\boxtimes P$. We may assume that $G$ is connected since, otherwise we can handle each connected component of $G$ separately.
+Let $P:=\{p_1,\ldots,p_n\}$ be a set of points in $\R^2$ and $D:=\{d_1,\ldots,d_n\}$ be a set of open disks such that, for $i\in\{1,\ldots,n\}$,  $d_i$ is the maximum-radius disk centred at $p_i$ with $d_i\cap P=\{p_i\}$, and let $c_i$ the circle that is the boundary of $d_i$.  Let $G$ be the sphere-of-influence graph of $P$.  (Equivalently, $G$ is the intersection graph of $\{d_1,\ldots,d_n\}$.)  We want to prove that there exist a graph $H$ of treewidth at most $?$ and a path $P$ such that $G$ is isomorphic to a subgraph of $H\boxtimes P$. 
 
-So that we have a place to start, we let $t>0$ and assume that $p_1:=(0,t\sqrt{7/4})$, $p_2:=(-t. -t\sqrt{3/2})$, and $p_3:=(t, -t\sqrt{3/2})$.  For a sufficiently large value of $t$, the points $a_0,a_1,a_2$ are the vertices of an equilateral triangle whose interior contains the disks $d_4\ldots,d_n$.  This assumption is safe, since we can always add three such vertices of $P$ to obtain a graph that contains $G$ as a subgraph.
+With a slight abuse of notation, we will treat the vertices of $G$ as the integers $1,\ldots,n$, so that, if $v=p_i$, then $p_v$ and $d_v$ denote $p_i$ and $d_i$ respectively.  We may assume that $G$ is connected since we can always add a path points to $p$ to make a it so.  In particular, for any two connected components $C_1$ and $C_2$ of $\bigcup_{i=1}^n d_i$, one can always add a set $X$ of points so that the sphere of influence graph of $P\cup X$ is a supergraph of $G$ in which $V(C_1)$ and $V(C_2)$ are in the same connected component.
 
-Let $C_0$ be the circle that contains $p_1$, $p_2$, and $p_3$.
+So that we have a place to start, we let $t>0$ and assume that $p_1:=(0,t\sqrt{7/4})$, $p_2:=(-t. -t\sqrt{3/2})$, and $p_3:=(t, -t\sqrt{3/2})$.  For a sufficiently large value of $t$, the points $p_1,p_2,p_3$ are the vertices of an equilateral triangle whose interior contains the disks $d_4\ldots,d_n$ and $p_1p_2p_3$ is a $3$-cycle in $G$.  This assumption is safe, since we can always add three such vertices to $P$ to obtain a graph that contains $G$ as a subgraph.  Let $L_0,\ldots,L_h$ be a BFS layering of $G$ with $L_0:=\{p_1,p_2,p_3\}$ and let $T$ be a spanning forest of $G$ in which each vertex $v\in L_i$ has a parent in $L_{i-1}$, for each $i\in\{1,\ldots,h\}$.
+
+Let $c$ be a simple closed curve in $\R^2$, and let $V_c:=\{v\in V(G):\overline{d_v}\cap c\neq\emptyset\}$.  A partition $(V_1,V_2,V_3)$ of $V_c$ is \emph{Sperner-valid} for a bounded component $X$ of $\R^2\setminus (c\cup \bigcup_{v\in V_c} d_v)$ if the boundary $\partial X$ of $X$ can be partitioned into three simple curves $f_1$, $f_2$, and $f_3$ such that $f_i\subseteq c\cup \bigcup_{v\in V_i}c_v$.  A partition $(V_1,V_2,V_3)$ of $V_c$ is \emph{Sperner-valid} if it is Sperner-valid for each bounded component of $\R^2\setminus (c\cup \bigcup_{v\in V_c} d_v)$.
+
+Let $c_0$ be the circle that contains $p_1$, $p_2$, and $p_3$.   Observe that $D_{c_0}:=\{d_1,d_2,d_3\}$ and that $(\{d_1\},\{d_2\},\{d_3\})$ is a Sperner-valid partition of $D_{c_0}$.
+
+We say that a subset $S\subseteq V(G)$ has \emph{thickness} $k$ with respect to $T$ if there exists $k$ disjoint vertical paths $P_1,\ldots,P_k$ in $T$ such that each, for each $x\in S$, $d_x \cap (\bigcup_{i=1}^k\bigcup_{vw\in P_i}\bigcup_{i=1}^k vw)\neq\emptyset$.  That is, each disk in $D$ defined by a center in $S$ intersects at least one of the edges of $P_1,\ldots,P_k$.
+
+\begin{lem}
+    Let $c\subseteq c_0\cup\interior(c_0)$ be a simple closed curve in $\R^2$, let $(D_1,D_2,D_3)$ be a Sperner-valid partition of $D_c$, and let $D':=\{d\in D:d\cap (\overline{c}\cup c^-)\neq\emptyset\}$.  Then the induced graph $G':=G[D']$ has a vertex partition $\mathcal{P}$ such that 
+    \begin{compactenum}[(i)]
+      \item $D_1,D_2,D_3 \in \mathcal{P}$;
+      \item each part $P\in\mathcal{P}\setminus\{D_1,D_2,D_3\}$ has thickness at most 3; and
+      \item the quotient graph $H:=G'/\mathcal{P}$ has a width-$3$ tree decomposition $\mathcal{T}:=(B_x:x\in V(T))$ in which $\{D_1,D_2,D_3\}\subseteq B_x$ for some $x\in V(T)$.
+    \end{compactenum}
+\end{lem}
+
+\begin{proof}
+  Since $c\subseteq c_0\cup\interior(c_0)$, each vertex $v\in V(G')$ has a $T$-ancestor $w$ with $d_w\in D$.  If $w$ is the lowest such $T$-ancestor of $v$ and $w\in D_i$ then we say that $v$ has colour $i$.
+  
+  
+  
+  For each vertex $v\in V(G')$, consider the lowest ancestor $w$ of $v$ in $T$ that is in $D'$.  Since $c\subseteq c_0\cup\interior(c_0)$, $w$ is well defined.  We say that $v$ has colour $i$ if $w\in D_i$.  
+  
+  For each point 
+  
+  
+  
+  For each point $p\in\R^2$ and any disk $d$ of radius $r$ with center $c$, define $\dist(p,d):=\|pc\|_2-r$.  
+  
+  
+    $w\in D'$ on the path from $v$ to the root of $T$.
+We now extend this colouring of $c_0'$, first to a colouring of the edges and vertices of $G$ and then to the entire interior of $X$. 
+\begin{enumerate}
+  \item The vertices $p_1$, $p_2$, and $p_3$ are coloured red, green, and blue, respectively.
+  \item For each $i\in\{1,\ldots,h\}$ and each vertex $v\in L_i$, the colour of $v$ is the the same as that of its parent in $T$.
+  \item For each edge $uv$ of $T$, the colour of $uv$ is the same as the colour of its two endpoints.
+\end{enumerate}
+
+We treat $G$ as a geometric graph whose vertices are points and whose edges are line segments joining their endpoints.  Thus, the colouring defined above defines a colouring of the boundary of $X$ and a one-dimensional subset of the interior of $X$.  Now, for each uncoloured point in the interior of $x$ we find the largest open disk $d_x$ centered at $x$ that contains no coloured point in its interior.  Let $P_x$ be the set of coloured points on the boundary of $d_x$.  By definition $P_x$ is non-empty.  If all points in $P_x$ have the same colour, $\alpha$, then we colour $x$ with $\alpha$. Otherwise, we leave $x$ uncoloured.  
+
+At the end of this process, all but a one-dimensional subset of the interior of $X$ remains uncoloured.  Sperner's Lemma implies that there is an uncoloured point $s$ in the interior of $X$ such that every disk of positive radius centered at $s$ contains points of all three colours.  From $x$ we construct 
+
+\end{proof}
 
 
 
